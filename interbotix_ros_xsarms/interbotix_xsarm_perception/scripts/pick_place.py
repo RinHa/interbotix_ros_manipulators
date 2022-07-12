@@ -13,7 +13,7 @@ from interbotix_perception_modules.pointcloud import InterbotixPointCloudInterfa
 
 def main():
     # Initialize the arm module along with the pointcloud and armtag modules
-    bot = InterbotixManipulatorXS("wx200", moving_time=1.5, accel_time=0.75)
+    bot = InterbotixManipulatorXS("px100", moving_time=1.5, accel_time=0.75)
     pcl = InterbotixPointCloudInterface()
     armtag = InterbotixArmTagInterface()
 
@@ -28,8 +28,8 @@ def main():
     bot.arm.set_ee_pose_components(x=0.3, z=0.2)
 
     # get the cluster positions
-    # sort them from max to min 'x' position w.r.t. the 'wx200/base_link' frame
-    success, clusters = pcl.get_cluster_positions(ref_frame="wx200/base_link", sort_axis="x", reverse=True)
+    # sort them from max to min 'x' position w.r.t. the 'px100/base_link' frame
+    success, clusters = pcl.get_cluster_positions(ref_frame="px100/base_link", sort_axis="x", reverse=True)
 
     # pick up all the objects and drop them in a virtual basket in front of the robot
     for cluster in clusters:
