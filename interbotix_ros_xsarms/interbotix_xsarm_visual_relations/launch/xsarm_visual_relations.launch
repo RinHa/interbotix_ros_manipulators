@@ -18,7 +18,7 @@
   <arg name="depth_height"                      default="480"/>
 
   <arg name="filter_ns"                         default="pc_filter"/>
-  <arg name="filter_params"                     default="$(find interbotix_xsarm_perception)/config/filter_params.yaml"/>
+  <arg name="filter_params"                     default="$(find interbotix_xsarm_visual_relations)/config/filter_params.yaml"/>
   <arg name="use_pointcloud_tuner_gui"          default="false"/>
   <arg name="enable_pipeline"                   default="$(arg use_pointcloud_tuner_gui)"/>
   <arg name="cloud_topic"                       default="/camera/depth/color/points"/>
@@ -36,11 +36,13 @@
   <arg name="use_armtag_tuner_gui"              default="false"/>
   <arg name="position_only"                     default="false"/>
 
+  <arg name="use_visual_relations_command_gui"  default="true"/>
+
   <arg name="load_transforms"                   default="true"/>
-  <arg name="transform_filepath"                default="$(find interbotix_xsarm_perception)/config/static_transforms.yaml"/>
+  <arg name="transform_filepath"                default="$(find interbotix_xsarm_visual_relations)/config/static_transforms.yaml"/>
 
   <arg name="rviz_frame"                        default="$(arg robot_name)/$(arg base_link_frame)"/>
-  <arg name="rvizconfig"                        default="$(find interbotix_xsarm_perception)/rviz/xsarm_perception.rviz" />
+  <arg name="rvizconfig"                        default="$(find interbotix_xsarm_visual_relations)/rviz/xsarm_visual_relations.rviz" />
 
   <include file="$(find interbotix_xsarm_control)/launch/xsarm_control.launch">
     <arg name="robot_model"                       value="$(arg robot_model)"/>
@@ -86,6 +88,10 @@
     <arg name="arm_tag_frame"                     value="$(arg arm_tag_frame)"/>
     <arg name="use_armtag_tuner_gui"              value="$(arg use_armtag_tuner_gui)"/>
     <arg name="position_only"                     value="$(arg position_only)"/>
+  </include>
+
+  <include file="$(find interbotix_perception_modules)/launch/visual_relations_command.launch">
+    <arg name="use_visual_relations_command_gui"  value="$(use_visual_relations_command_gui)"/>
   </include>
 
   <include file="$(find interbotix_perception_modules)/launch/static_transform_pub.launch">
